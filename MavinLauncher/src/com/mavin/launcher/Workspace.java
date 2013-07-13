@@ -793,10 +793,14 @@ public class Workspace extends SmoothPagedView
         // We need to ensure that there is enough extra space in the wallpaper for the intended
         // parallax effects
         if (LauncherApplication.isScreenLarge()) {
-            mWallpaperWidth = (int) (maxDim * wallpaperTravelToScreenWidthRatio(maxDim, minDim));
+            //mWallpaperWidth = (int) (maxDim * wallpaperTravelToScreenWidthRatio(maxDim, minDim));
+        	/**Anshu**/
+        	mWallpaperWidth = mDisplayWidth;
             mWallpaperHeight = maxDim;
         } else {
-            mWallpaperWidth = Math.max((int) (minDim * WALLPAPER_SCREENS_SPAN), maxDim);
+            //mWallpaperWidth = Math.max((int) (minDim * WALLPAPER_SCREENS_SPAN), maxDim);
+        	/**Anshu**/
+        	mWallpaperWidth = mDisplayWidth;
             mWallpaperHeight = maxDim;
         }
         new Thread("setWallpaperDimension") {

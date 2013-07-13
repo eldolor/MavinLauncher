@@ -59,6 +59,22 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
 
+    <!-- Begin: SDK Related -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <!-- End: SDK Related -->
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
     <application
         android:name="com.mavin.launcher.LauncherApplication"
         android:hardwareAccelerated="@bool/config_hardwareAccelerated"
@@ -126,6 +142,90 @@
                 <action android:name="com.android.launcher.action.UNINSTALL_SHORTCUT" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.mavin.broadcast.MavinBroadcastReceiverActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.mavin.broadcast.MavinBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+            </intent-filter>
+            <intent-filter android:priority="100" >
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Begin: SDK Related -->
+        <activity
+            android:name="com.mavin.ads.MavinAdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <!-- End: SDK Related -->
+
+        <service
+            android:name="com.mavin.wallpaper.service.WallpaperService"
+            android:exported="true" />
+        <!-- Begin: SDK Related -->
+        <service android:name="com.mavin.campaign.sync.CampaignDownloadService" />
+        <service android:name="com.mavin.campaign.sync.CampaignProcessingService" />
+        <service android:name="com.mavin.campaign.sync.CampaignCleanupService" />
+        <service android:name="com.mavin.adstats.sync.AdStatsUploadService" />
+        <service android:name="com.mavin.device.sync.DeviceRegistrationService" />
+        <service android:name="com.mavin.device.sync.DeviceProfileUploadService" />
+        <service android:name="com.mavin.ad.response.sync.AdResponsesUploadService" />
+        <!-- End: SDK Related -->
+
+
+        <!-- Wallpaper -->
+        <receiver android:name="com.mavin.wallpaper.service.AlarmActionReceiver" >
+            <intent-filter>
+                <action android:name="com.mavin.wallpaper.ALARM_ACTION" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Begin: SDK Related -->
+        <!-- Campaign Sync -->
+        <receiver android:name="com.mavin.campaign.sync.AlarmActionReceiver" >
+            <intent-filter>
+                <action android:name="com.mavin.campaign.sync.CAMPAIGN_DOWNLOAD_BEGIN_ACTION" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.mavin.campaign.sync.CAMPAIGN_DOWNLOAD_COMPLETE_ACTION" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.mavin.campaign.sync.CAMPAIGN_PROCESSING_COMPLETE_ACTION" />
+            </intent-filter>
+        </receiver>
+        <!-- AdStats Sync -->
+        <receiver android:name="com.mavin.adstats.sync.AlarmActionReceiver" >
+            <intent-filter>
+                <action android:name="com.mavin.adstats.sync.AD_STATS_UPLOAD_BEGIN_ACTION" />
+            </intent-filter>
+        </receiver>
+        <!-- Device Registration Sync -->
+        <receiver android:name="com.mavin.device.sync.AlarmActionReceiver" >
+            <intent-filter>
+                <action android:name="com.mavin.device.sync.DEVICE_REGISTRATION_ACTION" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.mavin.device.sync.DEVICE_PROFILE_UPLOAD_BEGIN_ACTION" />
+            </intent-filter>
+        </receiver>
+        <!-- Feed Sync -->
+        <receiver android:name="com.mavin.ad.AlarmActionReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <!-- End: SDK Related -->
+
 
         <!-- The settings provider contains Home's data, like the workspace favorites -->
         <provider
