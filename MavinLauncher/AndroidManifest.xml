@@ -67,14 +67,15 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
+<!--     <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_LOGS" />
-    <!-- End: SDK Related -->
+ -->    <!-- End: SDK Related -->
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
-
+    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
+    
     <application
         android:name="com.mavin.launcher.LauncherApplication"
         android:hardwareAccelerated="@bool/config_hardwareAccelerated"
